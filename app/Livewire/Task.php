@@ -8,14 +8,16 @@ use App\Models\Task as TaskModel;
 class Task extends Component
 {
     public $tasks;
-    public $title;
+    public string $title;
+    public string $description;
     public $taskId;
-    public $description;
 
     protected $rules = [
         'title'       => 'required|max:40',
         'description' => 'required|max:400',
     ];
+
+
 
     public function mount(): void
     {
@@ -35,14 +37,18 @@ class Task extends Component
 
         if ($this->taskId) {
             $task = TaskModel::find($this->taskId);
-            $task->title = $this->title;
-            $task->description = $this->description;
+            $task->title        = $this->title;
+            $task->description  = $this->description;
             $task->save();
+            $this->dispatch('taskCreated', $msg = 'Tarefa editada com sucesso');
+
         } else {
             $task = new TaskModel();
             $task->title = $this->title;
             $task->description = $this->description;
             $task->save();
+            $this->dispatch('taskCreated', 'Tarefa criada com sucesso');
+
         }
 
         //limpar o formulário
@@ -63,5 +69,22 @@ class Task extends Component
     public function updated()
     {
         $this->validate();
+    }
+
+    public function done($id)
+    {
+        $taskDone = TaskModel::find($id);
+        $taskDone->update(['done' => !$taskDone->done]);
+        $this->tasks = TaskModel::orderBy('id', 'desc')->get();
+    }
+
+    public function delete($id)
+    {
+        $this->taskToDelete = TaskModel::find($id);
+        if(!is_null($this->taskToDelete)){
+            $this->taskToDelete->delete();
+            $this->dispatch('taskCreated', 'Tarefa excluída com sucesso');
+        }
+        $this->tasks = TaskModel::orderBy('id', 'desc')->get();
     }
 }
