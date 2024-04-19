@@ -37,8 +37,9 @@ class Task extends Component
         //limpar o formulário
         $this->title = '';
         $this->description = '';
-        $this->tasks = TaskModel::get();
-        session()->flash('message', 'Tarefa adicionada!');
+
+        $this->dispatch('taskCreated', 'Tarefa adicionada!');
+        $this->mount();
     }
 
     public function updated()

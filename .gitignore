@@ -17,3 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/database/example_app
+.sqlite
+example_app
+example_app.sqlite
