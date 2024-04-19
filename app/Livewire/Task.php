@@ -40,4 +40,9 @@ class Task extends Component
         $this->tasks = TaskModel::get();
         session()->flash('message', 'Tarefa adicionada!');
     }
+
+    public function updated()
+    {
+        $this->validate();
+    }
 }
