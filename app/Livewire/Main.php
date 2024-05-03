@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Main extends Component
 {
-    public string $ola = "Olá! Essas são suas tarefas:";
+    public string $ola = "Olá! Sabe o que dá pra fazer com Livewire?!";
     protected $listeners = ['taskCreated'];
 
     public function taskCreated($msg)
