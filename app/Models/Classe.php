@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Classe extends Model
 {
     use HasFactory;
+
+    public $fillable = ['name'];
+
+    public function sections()
+    {
+        return $this->hasMany(Section::class, 'classe_id');
+    }
 }

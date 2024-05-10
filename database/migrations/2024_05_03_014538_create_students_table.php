@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->foreignId('class_id')->constrained('classes')->cascadeOnDelete();
-            $table->string('email')->nullable();
+            $table->foreignId('section_id')->constrained('sections');
+            $table->foreignId('classe_id')->constrained('classes');
             $table->softDeletes();
             $table->timestamps();
         });
