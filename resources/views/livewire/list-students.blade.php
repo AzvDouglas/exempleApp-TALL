@@ -1,4 +1,4 @@
-<div class="bg-gray-100 py-10">
+<div class="py-10 bg-gray-100">
     <div class="mx-auto max-w-7xl">
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
@@ -15,15 +15,15 @@
 
                 <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                     <a href="" as="button"
-                        class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus-outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                        class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus-outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
                         Add Student
                     </a>
                 </div>
             </div>
 
-            <div class="mt-8 flex flex-col">
+            <div class="flex flex-col mt-8">
 
-                <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden ring-1 ring-black ring-opacity-5 md-rounded-lg">
 
@@ -54,40 +54,50 @@
                                     </tr>
                                 </thead>
 
-                                <tbody class="divide-y divide-gray-200 bg-white">
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    @foreach ($students as $student)
+                                        
                                     <tr>
                                         <td
-                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            1
+                                            class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6">
+                                            {{ $student->id }}
                                         </td>
                                         <td
-                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            John Doe
+                                            class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6">
+                                            {{ $student->name}}
                                         </td>
                                         <td
-                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            john@gmail.com
+                                            class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6">
+                                            {{ $student->email}}
                                         </td>
                                         <td
-                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            Classe X
+                                            class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6">
+                                            {{ $student->classe->name}}
                                         </td>
                                         <td
-                                            class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                            Seção Y
-                                        </td>
-                                        <td>
+                                            class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6">
+                                            {{ $student->section->name}}                                        </td>
+                                        <td
+                                            class="relative py-4 pl-3 text-sm font-medium text-right whitespace-nowrapr-4 sm:pr-6">
                                             {{--botões--}}
                                             <div class="flex items-center justify-center">
-                                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                    botão
+                                                <a href="#" class="mr-2 text-indigo-600 hover:text-indigo-900">
+                                                    Edit
+                                                </a>
+                                                <button class="p-4 py-2 ml-2 text-white bg-red-500 rounded fontbold hover:bg-red-700">
+                                                    Deletar
                                                 </button>
                                             </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div class="mt-5">
+                        {{$students->links()}}
+
                     </div>
                 </div>
             </div>
