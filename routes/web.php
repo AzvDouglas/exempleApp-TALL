@@ -1,7 +1,7 @@
 <?php
 
+use App\Livewire\ListStudents;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Counter;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +14,18 @@ use App\Livewire\Counter;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::view('/', 'welcome');
+
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/students', ListStudents::class)->name('students.index');
 });
 
-Route::get('/counter', Counter::class);
+require __DIR__.'/auth.php';
